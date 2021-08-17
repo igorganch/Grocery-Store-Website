@@ -1,0 +1,112 @@
+{% extends "base.html"%}
+{% load static %}
+{%block content %}
+
+
+
+
+<div class="card" style="width: 70%; margin-left: 15%; margin-right: 15%; margin-top: 5%;  margin-bottom: 5%;">
+    <div class="card-body">
+
+      <form action="{% url 'checkout_complete' %}"  method = "POST">
+        {% csrf_token %}
+      <h5 class="card-title">Billing Address</h5>
+
+
+
+      <label for="basic-url">Personal Info:</label>
+      <div class = "row">
+        <div class = "col">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="">Full Name</span>
+        </div>
+        <input name="name" type="text" required class="form-control">
+      </div>
+    </div>
+
+      <div class = "col">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="">Email</span>
+        </div>
+        <input name="email" type="email" required class="form-control">
+      </div>
+    </div>
+</div>
+<div class ="row ">
+    <div class ="col">
+    <label for="Address">Address:</label>
+    <input name ="Address" type="text" class="form-control">
+    </div>
+    <div class ="col">
+    <label for="city">City:</label>
+    <input name ="city" type="text" class="form-control">
+    </div>
+    <div class ="col">
+    <label for="postal">Postal:</label>
+    <input name ="postal" type="text" class="form-control">
+    </div>
+    
+</div>
+<hr>
+<h5 class="card-title">Payment</h5>
+
+<div class="d-block my-3">
+    <div class="custom-control custom-radio">
+      <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked="" required="">
+      <label class="custom-control-label" for="credit">Credit card</label>
+    </div>
+    <div class="custom-control custom-radio">
+      <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required="">
+      <label class="custom-control-label" for="debit">Debit card</label>
+    </div>
+    <div class="custom-control custom-radio">
+      <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required="">
+      <label class="custom-control-label" for="paypal">PayPal</label>
+    </div>
+  </div>
+
+  <div class ="row ">
+    <div class ="col">
+    <label for="nameoncard">Name on card:</label>
+    <input name ="nameoncard" type="text" class="form-control">
+    </div>
+    <div class ="col">
+    <label for="cardnum">Credit card number: </label>
+    <input name ="cardnum" type="text" class="form-control">
+    </div>
+  </div>
+
+    <div class ="row ">
+        <div class ="col">
+        <label for="expiration">Expiration:</label>
+        <input style ="width:60px;"name ="expiration" type="text" class="form-control">
+        </div>
+        <div style = "margin-right: 750px;"class ="col">
+        <label for="cvv">CVV: </label>
+        <input style ="width:60px;" name ="cvv" type="text" class="form-control">
+        </div>
+  
+    
+</div>
+    <div style ="margin-top: 20px;"class ="row ">
+        <div class ="col">
+        <button type="submit" class="btn btn-warning">Submit Payment</button>
+    </div>
+    <div style="padding-bottom: 0px; padding-left: 450px;"class ="col">
+        <h2 style =" margin-top: 0px; "class="card-title">Total: ${{cart.get_cart_total | floatformat:2}}</h2>
+    </div>
+    </div>
+      </form>
+    </div>
+    
+  </div>
+
+
+
+
+
+
+
+{% endblock %}

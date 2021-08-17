@@ -1,0 +1,113 @@
+
+{% extends "base.html"%}
+{% load static %}
+{%block content %}
+
+<div class = "row"  id = "homecard">
+    <div   class="card mb-3">
+        <img class="card-img-top" src="{% static 'images/banner.png' %}" alt="Card image cap">
+        <div class="card-body bg-dark" style ="margin-bottom:-20px; padding-right:0px; height: 1700px;">
+            <div style="margin-left: -50px;"class="card-header text-center text-success"><h2 style="margin-top: -15px;">CATEGORIES</h2></div>
+            <div class = "row" style=" margin-left: 5%; margin-top: 5%;">
+                <div class = "col-lg-3 zoom">
+                    <a href = "{% url 'products_category' 'produce' %}"><img style="height: 250px; width: 250px;" class="card-img-top" src="{% static 'images/produce.png' %}" ></a>
+                </div>
+                <div class = "col-lg-3 zoom">
+                    <a href = "{% url 'products_category' 'meats' %}"><img style="height: 250px; width: 250px;" class="card-img-top" src="{% static 'images/meats.png' %}" ></a>
+                </div>
+                <div class = "col-lg-3 zoom">
+                    <a href = "{% url 'products_category' 'dairy' %}"><img style="height: 250px; width: 250px;" class="card-img-top" src="{% static 'images/dairy.png' %}" ></a>
+                </div>
+                <div class = "col-lg-3 zoom">
+                  <a href="{% url 'products_everything' %}"> <img style="height: 250px; width: 250px;" class="card-img-top" src="{% static 'images/everything.png' %}" ></a>
+                </div>
+            </div>
+
+            <div style=" height: 70px; margin-top:70px; margin-left: -50px; padding-left: 40px;"class="card-header text-left bg-success text-light"><h1 style="margin-top: 0px;">FEATURED</h1></div>
+
+            
+
+            <div style="margin-top: 50px;" class = "row">
+
+            {% for item in items %}
+            
+              <div class="zoom col-lg-2">
+                <form action="{% url 'cart_add' item.id %}" class ="cartform" id="addtocart{{item.id}}" method = "POST">
+                    {% csrf_token %}
+                <div class="card" style= "height:430px;  width: 200px;">
+                    <img class="card-img-top" style="width: 200px; height: 200px;"src="{{item.image.url}}" alt="Card image cap">
+                    <div class="card-body">
+                      <h5 class="card-title text-center">{{item.supplier}} {{item.name}}</h5>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item text-success">${{item.price}}</li>
+                      <li style="height: 35px; margin-bottom: 15px;"class="list-group-item text-success">
+                        <div  style = "margin-top : -10px; margin-left: 33px;"class = "nozoom row quantity-input">
+                            <input type="button" id = "btneg" class="btneg " value="-">
+                            <input form="addtocart{{item.id}}" class= "quantity" style =" padding-left:38px; width: 90px;" type="number" name="quantity"  min="0" max="20" value="0">
+                            <input type="button"  id="btpos" class="btpos " value="+">
+                        </div> 
+                      </li>
+                    </ul>
+                    <div class = "nozoom" style = "margin-top : -14px; ">
+                        <button type="submit"  form="addtocart{{item.id}}" value="Submit" class="cart-button">
+                        <span class="add-to-cart">Add to cart</span>
+                        <span class="added">Added</span>
+                        <i class="fas fa-shopping-cart"></i>
+                        <i class="fas fa-box"></i>
+                      </button>
+                    </div> 
+                </div>
+
+                </form>
+            </div>
+        
+            {% endfor %}
+            </div>
+
+            <div style="background-color: black; height: 9%; margin-top:3%; margin-left: -50px;"class=" card-header text-center text-white"><h1 style="margin-top: 35px;">ABOUT THIS APP</h1></div>
+            <div style="width:60%; margin-left: 20%; margin-right:20%;"class="card-body bg-light">
+                <p class="card-text">This project is developed using Django framework and storing data using PostgreSQL. In this app you're able to browse through the websites products as well
+                    as add items to carts and checkout. The design of the website was created using CSS,HTML, Javascript, JQuery, Bootstrap, as well as photoshop for the graphic designs. </p>
+               
+               <div class = "row">
+
+               <div class ="col-lg-2">
+                    <h5 class="card-title">Technolgies used:</h5>
+                <p class="card-text"><small class="text-muted">Django<br>PostgreSQL<br>Bootstrap<br>CSS<br>HTML<br>JavaScript<br>JQuery </small></p>
+                </div>
+
+
+                <div class ="col-lg-10">
+                    <div class = "row">
+                <div class ="col-lg-2 zoom">
+                    <img style="height: 100px; width: 100px;" src="{% static 'images/django.png' %}" >
+                </div>
+                <div  class ="col-lg-2 zoom">
+                    <img style="height: 100px; width: 100px;" src="{% static 'images/postgreSQL.png' %}" >
+                </div>
+                <div  class ="col-lg-2 zoom">
+                    <img style="height: 100px; width: 100px;" src="{% static 'images/bootstrap.png' %}" >
+                </div>
+                <div  class ="col-lg-2 zoom">
+                    <img style="height: 100px; width: 100px;" src="{% static 'images/CSS.png' %}" >
+                </div>
+                <div  class ="col-lg-2 zoom ">
+                    <img style="height: 100px; width: 100px;" src="{% static 'images/ps.png' %}" >
+                </div>
+                <div  class ="col-lg-2 zoom ">
+                    <img style="height: 100px; width: 100px;" src="{% static 'images/js.png' %}" >
+                </div>
+                <div  class ="col-lg-2 zoom ">
+                    <img style="height: 100px; width: 100px;" src="{% static 'images/jq.png' %}" >
+                </div>
+            </div>
+            </div>
+            </div>
+                </div>
+                
+            </div>
+        </div>
+</div>
+
+{% endblock %}
