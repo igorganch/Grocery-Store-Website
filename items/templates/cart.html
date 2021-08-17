@@ -1,0 +1,327 @@
+{% extends "base.html"%}
+{% load static %}
+{%block content %}
+
+
+
+
+
+
+<!-- The Modal -->
+
+<div class ="row">
+    <div class ="col-lg col-xl">
+
+
+
+
+<div id="myModal" class="modal">
+
+  <div class="modal-content">
+    <span class="close">&times;</span>
+ 
+        <h5 style = "margin-left: 2%;"class="modal-title">Checkout</h5>
+
+
+
+      <ul id="modallist" class="list-group list-group-flush">
+
+
+        <div style = "margin-top: 3%;"class = "row">
+            <div style = "height: 5%; width: 5%; " class = "col">
+                <h6 style="margin-left:12%;" class="card-title text-dark">Item</h6>
+            </div>
+            <div style = "height: 5%; width: 5%; padding-left: 13%;"class = "col">
+                <h6 style="margin-left:100%;" class="card-title text-dark">Price</h6>
+            </div>
+
+            <div style = "height: 5%; width: 5%; " class = "col">
+                <h6 style="margin-left:70%;" class="card-title text-dark">Quantity</h6>
+            </div>
+            <div style = "height: 5%; width: 5%; " class = "col">
+                <h6 style="margin-left:50%;"class="card-title text-dark">Total</h6>
+            </div>
+        </div>
+        
+        {% for item in cart.orderitem_set.all %}
+        <li id ="{{item.item.id}}-listmodal" class="list-group-item">
+            
+            <div class = "row align-items-start">
+                <div style="margin-right: 6%; height: 5%; width: 5%;" class = "zoom col lign-self-start">
+
+                    <img style="width: 50px; height: 50px;"src="{{item.item.image.url}}" alt="Card image cap">
+
+                    
+                </div>
+                <div  style = "height: 5%; width: 5%; "class = "col align-self-start">
+                
+                    <p style="margin-left: 80%;" class="card-text">{{item.item.name}}</p>
+                    
+
+                    
+                </div>
+
+                <div style = "padding-left : 20%; height:5%; width: 5%; " class = "col align-self-start">
+                
+                    <p style="margin-left: 90%;"  class="card-text text-success">${{item.item.price}}</p>
+                    
+
+                </div>
+                <div style = "height: 5%; width: 5%; "class = "col ">
+                    <p  style ="margin-left: 90%;"  class="card-text"> x </p>
+                </div>
+
+                <div style = "height: 5%; width: 5%;  " class = "col ">
+                    <p id ="{{item.item.id}}-modalquantity" style ="margin-left: 60%;"class="card-text">{{item.quantity}}</p>
+                </div>
+
+                <div style = "height: 5%; width: 5%;  " class = "col ">
+                    <p style ="margin-left: 40%;" class="card-text"> = </p>
+                </div>
+
+                <div style = "height: 5%; width: 5%;"  class = "col item-total-col">
+                
+                    <p  id ="{{item.item.id}}-modaltotal"class="card-text text-success">${{item.get_total}}</p>
+                
+
+                
+                </div>
+            </div>
+
+
+
+
+
+        </li>
+
+        {% endfor %}
+        
+      </ul>
+
+
+      <div style = "margin-top: 1%;" class = "row">
+        <div class ="col">
+            <h5 style="margin-left: 100%"class="card-title">Total:</h5>
+        </div>
+        <div class ="col">
+            <h5 style="margin-left:10%"id ="cart-modal-total" class=" text-success card-title">${{cart.get_cart_total | floatformat:2}}</h5>
+        </div>
+    </div>  
+
+      <div style = "margin-top: 5px;"class ="row">
+        <div class = "col">
+            <button style ="margin-left: 150px;" type="button" class="btn btn-danger cancel-close">Cancel</button>
+        </div>
+        <div class = "col">
+            <a href="{% url 'checkout' %}"><button style ="margin-left: 250px;" type="button" class="btn btn-success">Confirm?</button></a>
+        </div>
+
+      </div>
+     
+  </div>
+
+</div>
+
+
+
+<div style = "	width: 90%; margin-left: 5%; margin-right: 5%; margin-top: 2%;" class="col-lg col-md cartbox card bg-white mb-3" >
+    
+    <div class="card-body">
+      <h5 class="card-title text-dark">Cart</h5>
+      <ul id="cartlist"class="list-group list-group-flush">
+       
+        <div style = "margin-top: 3%;"class = "row">
+            <div class = "col">
+                <h6 style="margin-left:7%;" class="card-title text-dark">Item</h6>
+            </div>
+            <div class = "col">
+                <h6 style="margin-left:80%;" class="card-title text-dark">Price</h6>
+            </div>
+
+            <div class = "col">
+                <h6 style="margin-left:40%;" class="card-title text-dark">Quantity</h6>
+            </div>
+            <div class = "col">
+                <h6 style="margin-left:5%;"class="card-title text-dark">Total</h6>
+            </div>
+        </div>
+
+
+       
+        {% for item in cart.orderitem_set.all %}
+        <li id= "{{item.item.id}}-list" class="list-group-item">
+            <div class = "row">
+                <div style = "height: 10%; width: 10%"  class = "zoom col">
+
+                    <img style="width: 25%; height: 25%;"src="{{item.item.image.url}}" alt="Card image cap">
+
+                    
+                </div>
+                <div  style = "height: 10%; width: 10%" class = "col">
+                
+                    <p style = "margin-left: 20%;"class="card-text">{{item.item.name}}</p>
+                    
+
+                    
+                </div>
+
+                <div  style = "height: 10%; width: 10%" class = "col">
+                
+                    <p id="{{item.item.id}}-price"style = "margin-left: 68%;" class="card-text text-success">${{item.item.price}}</p>
+                    
+
+                </div>
+
+                <div style = "height: 10%; width: 10%" class = "col ">
+                    <div class = " row quantity-input" style= "margin-left: 58%;">
+                        <input type="button" id = "{{item.item.id}}"  class="btneg-cart" value="-">
+                        <input id = "{{item.item.id}}item-quantity" class= "quantity" style =" padding-left:38px; width: 90px;" type="number" name="quantity"  min="0" max="20" value="{{item.quantity}}">
+                        <input type="button"  id="{{item.item.id}}" class="btpos-cart" value="+">
+                    </div>
+    
+            </div>
+
+                <div style = "height: 10%; width: 10%" class = "col item-total-col">
+                
+                    <p  id = "{{item.item.id}}item-total" style="margin-left: 70%;"class="card-text text-success">${{item.get_total}}</p>
+                    
+
+                    
+                </div>
+
+                <div style = "height: 10%; width: 10%"class = "col">
+                    <div class = "-cart-button">
+                    <button value= "{{item.item.id}}" style = "margin-left: 60%; "class="btn btn-danger remove">Remove</button>
+                    </div>
+
+                    
+                </div>
+
+
+            </div>
+
+
+        </li>
+        {% endfor %}
+      </ul>
+      
+      
+    
+        <div style="margin-left:69%" class = "row total">
+            <div class ="col">
+                <h5 class="card-title">Total:</h5>
+            </div>
+            <div style="padding-right: 60%;"class ="col">
+                <h5  id ="cart-total"class=" text-success card-title">${{cart.get_cart_total | floatformat:2}}</h5>
+            </div>
+        </div>
+
+        <div class = "row">
+            <div class ="col">
+                <a href="{% url 'cart_clear' %}"><button style = "margin-left: 20%; " class="btn btn-danger cancel">Cancel</button></a>
+            </div>
+            <div class ="col">
+                   
+                <button id="myBtn" style = "margin-left: 70%; "class="btn btn-warning">Checkout</button>
+            </div>
+        </div>
+
+    </div>
+  </div>
+
+
+</div>
+</div>
+  <script>
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+var cancelbtn= document.getElementsByClassName("cancel-close")[0];
+
+var carttotal = document.getElementById("cart-total");
+var modaltotal = document.getElementById("cart-modal-total");
+
+var cartlist = document.getElementById("cartlist");
+var modallist = document.getElementById("modallist");
+
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+    modal.style.display = "block";
+    
+    var value = carttotal.textContent;
+    modaltotal.textContent = value;
+
+    var data =  cartlist.getElementsByTagName("li");
+    var datamodal =  modallist.getElementsByTagName("li");
+    var id; 
+
+    if (datamodal.length != data.length){
+
+        for (var i = 0 ; i  < datamodal.length; i++){
+            var check = false;
+            var temp = (datamodal[i].id).search("-");
+            var id2 = (datamodal[i].id).slice(0,temp);
+            for (var x = 0 ; x < data.length; x++){
+                temp  = (data[x].id).search("-");
+                var id = (data[x].id).slice(0,temp);
+
+
+
+                if (id == id2){
+                    check = true;
+                }
+            }
+
+
+            if (check == false){
+                datamodal[i].remove();
+
+            }
+
+        }
+
+    }
+
+    for (var i = 0 ; i < data.length; i++){
+
+        console.log(data[i].id);
+
+        let temp  = (data[i].id).search("-");
+        id = (data[i].id).slice(0,temp);
+
+        var itemtotal = document.getElementById(id + "item-total").textContent;
+        var quantity = document.getElementById(id + "item-quantity").value;
+        document.getElementById(id + "-modaltotal").textContent = itemtotal;
+        document.getElementById(id + "-modalquantity").textContent = quantity;
+
+
+    }
+
+    
+}
+
+
+
+
+
+
+// When the user clicks on <span> (x), close the modal
+cancelbtn.onclick = function() {
+  modal.style.display = "none";
+}
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+{% endblock %}
