@@ -44,13 +44,14 @@
                       <li style="height: 35px; margin-bottom: 15px;"class="list-group-item text-success">
                         <div  style = "margin-top : -10px; margin-left: 33px;"class = "nozoom row quantity-input">
                             <input type="button" id = "btneg" class="btneg " value="-">
-                            <input form="addtocart{{item.id}}" class= "quantity" style =" padding-left:38px; width: 90px;" type="number" name="quantity"  min="0" max="20" value="0">
+                            <input id = "{{item.id}}-prodquantity" form="addtocart{{item.id}}" class= "quantity" style =" padding-left:38px; width: 90px;" type="number" name="quantity"  min="0" max="20" value="0">
+                            <input type="button"  id="btpos" class="btpos " value="+">
                             <input type="button"  id="btpos" class="btpos " value="+">
                         </div> 
                       </li>
                     </ul>
                     <div class = "nozoom" style = "margin-top : -14px; ">
-                        <button type="submit"  form="addtocart{{item.id}}" value="Submit" class="cart-button">
+                        <button id = "{{item.id}}-cartbtn" type="submit"  form="addtocart{{item.id}}" value="Submit" class="cart-button">
                         <span class="add-to-cart">Add to cart</span>
                         <span class="added">Added</span>
                         <i class="fas fa-shopping-cart"></i>
