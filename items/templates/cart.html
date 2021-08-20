@@ -266,7 +266,7 @@ var modallist = document.getElementById("modallist");
 
 // When the user clicks on the button, open the modal
 btn.onclick = function() {
-    if (parseFloat(carttotal.text) > 0.0){
+    if (parseFloat(carttotal.textContent) > 0.0){
     
     var value = carttotal.textContent;
     modaltotal.textContent = value;
