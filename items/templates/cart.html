@@ -14,6 +14,18 @@
 
 
 
+        <div id="error" class="modal1">
+
+            <div class="modal-content1">
+              <span class="close1">&times;</span>
+              <h6 style="margin-left:10%;" class="card-title text-dark text-center">Error</h6>
+              <p class="card-text text-center">You must have something in your cart!</p>
+          
+            </div>
+        </div>
+
+
+
 
 <div id="myModal" class="modal">
 
@@ -234,12 +246,16 @@
 </div>
   <script>
 var modal = document.getElementById("myModal");
+var errormodal = document.getElementById("error");
 
 // Get the button that opens the modal
 var btn = document.getElementById("myBtn");
 
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
+var span1 = document.getElementsByClassName("close1")[0];
+
+
 var cancelbtn= document.getElementsByClassName("cancel-close")[0];
 
 var carttotal = document.getElementById("cart-total");
@@ -250,7 +266,7 @@ var modallist = document.getElementById("modallist");
 
 // When the user clicks on the button, open the modal
 btn.onclick = function() {
-   
+    if (parseFloat(carttotal.text) > 0.0){
     
     var value = carttotal.textContent;
     modaltotal.textContent = value;
@@ -315,7 +331,11 @@ btn.onclick = function() {
 
     }
     modal.style.display = "block";
-    
+}
+else{
+
+    errormodal.style.display = "block";
+}
 }
 
 
@@ -329,6 +349,9 @@ cancelbtn.onclick = function() {
 }
 span.onclick = function() {
   modal.style.display = "none";
+}
+span1.onclick = function() {
+  errormodal.style.display = "none";
 }
 
 // When the user clicks anywhere outside of the modal, close it
