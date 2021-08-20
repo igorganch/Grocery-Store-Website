@@ -38,4 +38,6 @@ urlpatterns = [
     path('cart/checkout/',views.checkout,name='checkout'),
     path('cart/checkout_complete/', views.checkout_complete, name ='checkout_complete'),
     path('orders/', views.orders, name ='orders'),
+    url(r'^media/(?P<path>.*)$', serve,{'document_root':       settings.MEDIA_ROOT}), 
+    url(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}), 
 ] + static(settings.MEDIA_URL, document_root =settings.MEDIA_ROOT)
