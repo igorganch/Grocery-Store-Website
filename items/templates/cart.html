@@ -250,7 +250,7 @@ var modallist = document.getElementById("modallist");
 
 // When the user clicks on the button, open the modal
 btn.onclick = function() {
-    modal.style.display = "block";
+   
     
     var value = carttotal.textContent;
     modaltotal.textContent = value;
@@ -259,9 +259,12 @@ btn.onclick = function() {
     var datamodal =  modallist.getElementsByTagName("li");
     var id; 
 
+    var lidelete =[]; 
+    console.log("data.ltngth = " + data.length + " " + datamodal.length )
     if (datamodal.length != data.length){
 
         for (var i = 0 ; i  < datamodal.length; i++){
+            console.log("LOOP" + i + " + datamodal.length " + datamodal.length);
             var check = false;
             var temp = (datamodal[i].id).search("-");
             var id2 = (datamodal[i].id).slice(0,temp);
@@ -274,17 +277,28 @@ btn.onclick = function() {
                 if (id == id2){
                     check = true;
                 }
+                console.log("id1 = " + id + "  id2 = " +id2 + " check = " +check );
             }
 
 
             if (check == false){
-                datamodal[i].remove();
-
+                lidelete.push(datamodal[i]);
+            
             }
 
         }
 
     }
+
+
+    for (var i = 0; i < lidelete.length; i++){
+
+        lidelete[i].remove(); 
+    }
+
+
+
+
 
     for (var i = 0 ; i < data.length; i++){
 
@@ -300,7 +314,7 @@ btn.onclick = function() {
 
 
     }
-
+    modal.style.display = "block";
     
 }
 
