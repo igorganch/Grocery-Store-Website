@@ -1,1 +1,1 @@
-web: gunicorn grocerrystore:grocerrystore
+web gunicorn grocerrystore:grocerrystore
