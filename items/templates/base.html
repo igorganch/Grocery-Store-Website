@@ -18,7 +18,7 @@
 <body>
 
 
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="top:0; background-color: forestgreen;">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style=" top:0; background-color: forestgreen;">
         <a class="navbar-brand text-white" href="{% url 'home' %}">Grocery Store</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -74,7 +74,7 @@
 
 
     <footer>
-      <div style="  bottom : 0; padding-left:50px;  background-color: black; height: 300px; margin-left: -50px;"class="card-header text-center text-white">
+      <div style="  bottom : 0; padding-left:50px;  background-color: black; height: 300px; "class="card-header text-center text-white">
         <h3 style="margin-bottom: 20px;" class ="text-center">CONTACT</h3>
         <h6 class="text-light">IHAR GANCHARENKA</h6>
         <h6 class="text-light">PHONE:    (647) 787-0734 </h6>
@@ -92,13 +92,27 @@
 <script>
   const cartButtons = document.querySelectorAll('.cart-button');
   
+  
   cartButtons.forEach(button => {
     button.addEventListener('click', cartClick);
   });
   
   function cartClick() {
     let button = this;
-    button.classList.add('clicked');
+  
+    var temp = (button.id).search("-");
+    var id = (button.id).slice(0,temp);
+
+    console.log(id);
+    var quantity = document.getElementById(id + "-prodquantity");
+    console.log(quantity)
+    if (quantity.value > 0 ){
+      button.classList.add('clicked');
+    }
+
+
+
+
   }
   
     </script>
